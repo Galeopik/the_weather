@@ -139,35 +139,29 @@
 
         <!-- Пока ничего не найдено -->
         <div class="placeholder">
-            Здесь появится информация о погоде
+
+
+
+            <div class="weather">
+                <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+
+                <div class="city">{{ city_weather.city }}</div>
+
+                <div class="temp">
+                    {{ city_weather.temperature }}°C
+                </div>
+
+                <div class="description">
+                    {{ city_weather.description }}
+                </div>
+
+                {% comment %} <div class="details">
+                    <div>💧 {{ weather.humidity }}%</div>
+                    <div>💨 {{ weather.wind }} м/с</div>
+                </div> {% endcomment %}
+
+            </div>
         </div>
-
-        <!--
-        Позже можно заменить на Django-шаблон:
-
-        {% if weather %}
-
-        <div class="weather">
-
-            <div class="city">{{ weather.city }}</div>
-
-            <div class="temp">
-                {{ weather.temperature }}°C
-            </div>
-
-            <div class="description">
-                {{ weather.description }}
-            </div>
-
-            <div class="details">
-                <div>💧 {{ weather.humidity }}%</div>
-                <div>💨 {{ weather.wind }} м/с</div>
-            </div>
-
-        </div>
-
-        {% endif %}
-        -->
 
     </div>
 
