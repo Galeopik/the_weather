@@ -137,31 +137,36 @@
 
     <div class="weather-card">
 
-        <!-- Пока ничего не найдено -->
-        <div class="placeholder">
-
-
+        {% if weather %}
 
             <div class="weather">
-                <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
 
-                <div class="city">{{ city_weather.city }}</div>
+                <img
+                    src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png"
+                    alt="{{ weather.description }}"
+                >
+
+                <div class="city">
+                    {{ weather.city }}
+                </div>
 
                 <div class="temp">
-                    {{ city_weather.temperature }}°C
+                    {{ weather.temp }}°C
                 </div>
 
                 <div class="description">
-                    {{ city_weather.description }}
+                    {{ weather.description }}
                 </div>
 
-                {% comment %} <div class="details">
-                    <div>💧 {{ weather.humidity }}%</div>
-                    <div>💨 {{ weather.wind }} м/с</div>
-                </div> {% endcomment %}
-
             </div>
-        </div>
+
+        {% else %}
+
+            <div class="placeholder">
+                Введите название города, чтобы узнать погоду 🌤️
+            </div>
+
+        {% endif %}
 
     </div>
 
