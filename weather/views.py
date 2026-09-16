@@ -9,6 +9,7 @@ load_dotenv()
 
 def index(request):
     weather_data = None
+    error = None
     city = request.GET.get('city')
     if city:
         api_key = os.getenv('API_KEY', '')
@@ -17,10 +18,22 @@ def index(request):
 
         if response.get('cod') == 200:
             weather_data = {
-                'city':city.title(),
-                'temp':response['main']['temp'],
-                'description':response['weather'][0]['description'].title(),
+                'city': city.title(),
+                'temp': int(response['main']['temp']),
+                'feels_like': response['main']['feels_like'],
+                'description': response['weather'][0]['description'].title(),
+                'wind': response['wind']['speed'],
+                'clouds': response['clouds']['all'],
+                'pressure': response['main']['pressure'],
                 'icon': response['weather'][0]['icon'],
             }
 
-    return render(request, 'index.html', {'weather': weather_data})
+        else:
+            error = 'Город не найден. Проверьте название.'
+
+    context = {
+        'weather': weather_data,
+        'error': error
+    }
+
+    return render(request, 'index.html', context)
